@@ -1,11 +1,127 @@
 // ReverseInteger.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
+/*
+requirements
+
+Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.
+
+Assume the environment does not allow you to store 64-bit integers (signed or unsigned).
+
+
+
+Example 1:
+
+Input: x = 123
+Output: 321
+
+Example 2:
+
+Input: x = -123
+Output: -321
+
+Example 3:
+
+Input: x = 120
+Output: 21
+
+
+
+Constraints:
+
+    -231 <= x <= 231 - 1
+
+
+*/
+
 
 #include <iostream>
+#include <math.h>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+constexpr int32_t UPPER_LIMIT = 2'147'483'647;
+constexpr int32_t LOWER_LIMIT = -2'147'483'648;
+
+
+int reverse(int x) 
+{
+
+    /*
+    //works with small numbers within the range of int only when * 10
+    int reversed = 0;
+    int8_t sign = (x < 0) ? (-1) : (1);
+    if (x / 10 == 0)
+    {
+        reversed = x;
+    }
+
+    else
+    {
+        //get the abs value of the number //maybe use abs()
+        if (sign == -1)
+        {
+            x = abs(x);
+        }
+
+        while (x > 0)
+        {
+            reversed = (reversed * 10) + (x % 10);
+            x /= 10;
+        }
+    }
+    return reversed * sign;
+
+    */
+    int reversednumber = 0;
+    vector<int> reversedvector;
+    int8_t sign = (x < 0) ? (-1) : (1);
+    if (x / 10 == 0)
+    {
+        reversednumber = x;
+    }
+
+    else
+    {
+        //get the abs value of the number //maybe use abs()
+        if (sign == -1)
+        {
+            x = abs(x);
+        }
+
+        while (x > 0)
+        {
+            reversedvector.push_back(x % 10);
+            x /= 10;
+        }
+
+        for (auto it : reversedvector)
+        {
+            if(reversednumber >= (UPPER_LIMIT / 10))
+            {
+                reversednumber = 0;
+                break;
+            }
+            reversednumber = (reversednumber * 10) + it;
+        }
+    }
+    return reversednumber * sign;
+
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    int number = -12345;
+    int reversednumber = reverse(number);
+
+    cout << "The reversed number = " << reversednumber << endl;
+
+    while (true)
+    {
+
+    }
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
