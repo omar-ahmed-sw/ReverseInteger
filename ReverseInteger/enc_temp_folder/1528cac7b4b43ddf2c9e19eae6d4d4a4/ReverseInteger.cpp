@@ -108,7 +108,7 @@ int reverse(int x)
             reversednumber2nd = (reversednumber2nd * 10) + reversedvector[i];
         }
 
-        if (reversednumber1st >= 2'147'4)
+        if (reversednumber1st > 2'147'4)
         {
             if (reversednumber2nd > 83'647)
             {
